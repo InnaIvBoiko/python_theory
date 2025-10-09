@@ -1,407 +1,434 @@
-# Модулі datetime та time. Робота з випадковими величинами. 
-# Модуль math.
+this_is_string = "Hi there!"
 
-# Перед роботою з датами і часом потрібно імпортувати модуль в нашому скрипті:
-import datetime
-now = datetime.datetime.now()
-print(now)
+the_same_string = 'Hi there!'
 
-# об'єкт datetime в свій скрипт ми також можемо отримати, просто витягнув його з модуля:
-from datetime import datetime, date, time
+this_is_string == the_same_string # True
 
-current_datetime = datetime.now()
+text = """This is first line
+And second line
+Last third line"""
 
-print(current_datetime.year)
-print(current_datetime.month)
-print(current_datetime.day)
-print(current_datetime.hour)
-print(current_datetime.minute)
-print(current_datetime.second)
-print(current_datetime.microsecond)
-print(current_datetime.tzinfo)
+print(text)
 
-# В об'єкта datetime є методи, щоб отримати дату (без часу) та час (без дати):
-print(current_datetime.date())
-print(current_datetime.time())
+song = '''Jingle bells, jingle bells
+Jingle all the way
+Oh, what fun it is to ride
+In a one horse open sleigh'''
 
-# Є зворотний метод datetime.combine який використовується для створення нового об'єкта datetime шляхом комбінування об'єктів date та time. 
-# datetime.datetime.combine(date_object, time_object)
+print(song)
 
-# Створення об'єктів date і time
-date_part = date(2023, 12, 14)
-time_part = time(12, 30, 15)
+one_line_text = "Textual data in Python is handled with str objects," \
+                " or strings. Strings are immutable sequences of Unicode" \
+                " code points. String literals are written in a variety " \
+                " of ways: single quotes, double quotes, triple quoted."
 
-# Комбінування дати і часу в один об'єкт datetime
-combined_datetime = datetime.combine(date_part, time_part)
+print(one_line_text)
 
-print(combined_datetime)  # Виведе "2023-12-14 12:30:15"
+("spam " "eggs") == "spam eggs"  # True
+('spam ' + 'eggs') == "spam eggs"  # True
 
-# Створення об'єкта datetime з конкретною датою
-specific_date = datetime(year=2020, month=1, day=7)
+print("Hello\nWorld") # Hello (new line) World
+print("Hello\tWorld") # Hello (tab) World
+print("Hello my little\rsister") # sistermy little
+print("Hello\bWorld") # HelloWorld
+print("Hello\\World") # Hello\World
+print('I\'m a programmer') # I'm a programmer
+print("He said: \"Hello!\"") # He said: "Hello!"
 
-print(specific_date)  # Виведе "2020-01-07 00:00:00"
+text = "  Hello World! Welcome to Python programming.  "
 
-# Створення об'єкта datetime з конкретною датою і часом
-specific_datetime = datetime(2020, 1, 7, 14, 30, 15)
+print(text.upper())  # Перетворення всіх літер на великі
+print(text.lower())  # Перетворення всіх літер на малі
+print(text.title())  # Перетворення першої літери кожного слова на велику
+print(text.capitalize())  # Перетворення першої літери речення на велику
+print(text.strip())  # Видалення пробілів на початку та в кінці рядка
 
-print(specific_datetime)  # Виведе "2020-01-07 14:30:15"
+# Методи рядків
+# Пошук у рядку
 
-# Отримання номера дня тижня
-day_of_week = now.weekday()
+s = "Hi there!"
 
-# Поверне число від 0 (понеділок) до 6 (неділя)
-print(f"Сьогодні: {day_of_week}") # Виведе номер дня тижня
+start = 0
+end = 7
 
-# Створення двох об'єктів datetime
-datetime1 = datetime(2023, 3, 14, 12, 0)
-datetime2 = datetime(2023, 3, 15, 12, 0)
+print(s.find("er", start, end)) # 5
+print(s.find("q")) # -1
 
-# Порівняння дат
-print(datetime1 == datetime2)  # False, тому що дати не однакові
-print(datetime1 != datetime2)  # True, тому що дати різні
-print(datetime1 < datetime2)   # True, тому що datetime1 передує datetime2
-print(datetime1 > datetime2)   # False, тому що datetime1 не наступає за datetime2
+s = 'Some words'
 
-# Робота з часовими проміжками timedelta
+print(s.find("o")) # 1
+print(s.rfind('o')) # 6
 
-from datetime import timedelta
-delta = timedelta(
-    days=50,
-    seconds=27,
-    microseconds=10,
-    milliseconds=29000,
-    minutes=5,
-    hours=8,
-    weeks=2
-)
-print(delta)
-print(f"days: {delta.days}, seconds: {delta.seconds}, microseconds: {delta.microseconds}")
+s = 'Some words'
 
-seventh_day_2019 = datetime(year=2019, month=1, day=7, hour=14)
-seventh_day_2020 = datetime(year=2020, month=1, day=7, hour=14)
+print(s.index("o")) # 1
+print(s.rindex('o')) # 6    
 
-difference = seventh_day_2020 - seventh_day_2019
-print(difference)  # 365 days, 0:00:00
-print(difference.total_seconds())  # 31536000.0
+# Поділ та об'єднання рядків 
+# Метод split()  str.split(separator=None, maxsplit=-1)
 
-now = datetime.now()
-future_date = now + timedelta(days=10)  # Додаємо 10 днів до поточної дати
-print(future_date)
+text = "hello world"
+result = text.split()
+print(result)  # Виведе: ['hello', 'world']
+text = "apple,banana,cherry"
+result = text.split(',')
+print(result)  # Виведе: ['apple', 'banana', 'cherry']
 
-seventh_day_2020 = datetime(year=2020, month=1, day=7, hour=14)
-four_weeks_interval = timedelta(weeks=4)
+# Метод join() string.join(iterable)
 
-print(seventh_day_2020 + four_weeks_interval)  # 2020-02-04 14:00:00
-print(seventh_day_2020 - four_weeks_interval)  # 2019-12-10 14:00:00
+list_of_strings = ['Hello', 'world']
+result = ' '.join(list_of_strings)
+print(result)  # Виведе: 'Hello world'
 
-# Ми можемо використати метод toordinal(), який повертає порядковий номер дня, 
-# враховуючи кількість днів з 1 січня року 1 нашої ери (тобто з початку християнського календаря). 
-# Цей метод перетворює об'єкт datetime в ціле число, що представляє порядковий номер даного дня.
+elements = ['earth', 'air', 'fire', 'water']
+result = ', '.join(elements)
+print(result)  # Виведе: 'earth, air, fire, water'
 
-# Створення об'єкта datetime
-date = datetime(year=2023, month=12, day=18)
 
-# Отримання порядкового номера
-ordinal_number = date.toordinal()
-print(f"Порядковий номер дати {date} становить {ordinal_number}")
+# Якщо потрібно видалити зайві пробіли на початку і в кінці рядка, є спеціальний метод strip(). У цього метода є два "брати":
+# "лівий", lstrip, видаляє тільки пробіли на початку рядка;
+# "правий", rstrip, видаляє тільки пробіли в кінці рядка.
 
-from datetime import datetime
+clean = '   spacious   '.strip()
+print(clean) # spacious
 
-# Встановлення дати спалення Москви Наполеоном (14 вересня 1812 року)
-napoleon_burns_moscow = datetime(year=1812, month=9, day=14)
+# Метод replace() має наступний синтаксис str.replace(old, new, count=-1)
 
-# Поточна дата
-current_date = datetime.now()
+text = "Hello world"
+new_text = text.replace("world", "Python")
+print(new_text) # Виведе: Hello Python
 
-# Розрахунок кількості днів
-days_since = current_date.toordinal() - napoleon_burns_moscow.toordinal()
-print(days_since)
-# Виведе кількість днів, що минули з 14 вересня 1812 року до сьогоднішнього дня
+text = "one fish, two fish, red fish, blue fish"
+new_text = text.replace("fish", "bird", 2)
+print(new_text)  # Виведе: one bird, two bird, red fish, blue fish
 
-# Робота з timestamp
-# ☝ timestamp є універсальним способом представлення часу, оскільки він не залежить від часових зон і календарних систем.
+# Метод replace() також застосовують для видалення підрядка
+text = "Hello, world!"
+new_text = text.replace(" world", "")
+print(new_text) # Виведе: Hello!
 
-# Конвертація datetime в timestamp
+# Для видалення фіксованої послідовності на початку рядка є метод removeprefix:
+print('TestHook'.removeprefix('Test')) # Hook
+print('TestHook'.removeprefix('Hook')) # TestHook
 
-# Поточний час
-now = datetime.now()
+# Є парний метод для видалення послідовності в кінці рядка, removesuffix:
+print('TestHook'.removesuffix('Test')) # TestHook
+print('TestHook'.removesuffix('Hook')) # Test
 
-# Конвертація datetime в timestamp
-timestamp = datetime.timestamp(now)
-print(timestamp)  # Виведе timestamp поточного часу
+# ==============================================================================
 
-# Конвертація timestamp в datetime
-# Припустимо, є timestamp
-timestamp = 1617183600
+# Розглянемо наступну задачу та використаємо основні інструменти для роботи з рядками - методи split() та replace(). Ви маєте URL пошукового запиту, і ваше завдання - видобути та обробити параметри цього запиту. Наприклад пошуковий запит "Cat and dog"
 
-# Конвертація timestamp назад у datetime
-dt_object = datetime.fromtimestamp(timestamp)
-print(dt_object)  # Виведе відповідний datetime
+# Спочатку нам треба отримати частини запиту з URL:
 
-# Парсинг дати із рядка datetime_object.strftime(format)
+url_search = "<https://www.google.com/search?q=Cat+and+dog&ie=utf-8&oe=utf-8&aq=t>"
+url_search = url_search.strip('<>') # Видаляємо кутові дужки
+_, query = url_search.split('?')
+print(query) # q=Cat+and+dog&ie=utf-8&oe=utf-8&aq=t
 
-# Форматування дати і часу
-formatted_date = now.strftime("%Y-%m-%d %H:%M:%S")
-print('formatted_date', formatted_date)
+obj_query = {}
+for el in query.split('&'):
+    key, value = el.split('=')
+    obj_query.update({key: value.replace('+', ' ')})
+print(obj_query) # {'q': 'Cat and dog', 'ie': 'utf-8', 'oe': 'utf-8', 'aq': 't'}
 
-# Форматування лише дати
-formatted_date_only = now.strftime("%A, %d %B %Y")
-print('formatted_date_only', formatted_date_only)
+# ==============================================================================
 
-# Форматування лише часу
-formatted_time_only = now.strftime("%I:%M %p")
-print('formatted_time_only', formatted_time_only)
+# isdigit() використовується для перевірки, чи складається рядок повністю з цифр. Цей метод повертає True, якщо всі символи в рядку є цифрами та рядок складається принаймні з одного символу, інакше повертає False.
 
-# Форматування лише дати
-formatted_date_only = now.strftime("%d.%m.%Y")
-print('formatted_date_only', formatted_date_only)
+print("123".isdigit())  # True
+print("123a".isdigit()) # False
 
-# Синтаксис методу strptime виглядає наступним чином:
-# datetime_object = datetime.strptime(string, format)
-# string - рядок, який потрібно розпарсити у дату
-# format - формат рядка, який потрібно розпарсити
+number = "12345"
+print(number.isdigit())  # Виведе: True
 
-# Припустимо, у нас є дата у вигляді рядка
-date_string = "2023.03.14"
+text = "Number123"
+print(text.isdigit())  # Виведе: False
 
-# Перетворення рядка в об'єкт datetime
-datetime_object = datetime.strptime(date_string, "%Y.%m.%d")
-print(datetime_object)  # Виведе об'єкт datetime, що відповідає вказаній даті та часу
 
-# Конвертація у формат ISO 8601
-iso_format = now.isoformat()
-print(iso_format)  # Виведе дату і час у форматі ISO 8601
+user_input = input("Введіть число: ")
+if user_input.isdigit():
+    print("Це дійсно число!")
+else:
+    print("Це не число!")
+    
+for char in "Hello 123":
+    if char.isdigit():
+        print(f"'{char}' - це цифра")
+    else:
+        print(f"'{char}' - не цифра")
 
-iso_date_string = "2023-03-14T12:39:29.992996"
+# Метод translate()
 
-# Конвертація з ISO формату
-date_from_iso = datetime.fromisoformat(iso_date_string)
-print(date_from_iso)  # Виведе об'єкт datetime, що відповідає вказаній даті та часу
+intab = "aeiou"
+outtab = "12345"
+trantab = str.maketrans(intab, outtab)
 
-# Метод isoweekday() у об'єкті datetime використовується для отримання дня тижня відповідно до ISO 8601. Згідно з цим стандартом, тиждень починається з понеділка, який має значення 1, і закінчується неділею, яка має значення 7.
-# Використання isoweekday() для отримання дня тижня
-day_of_week = now.isoweekday()
+str = "This is string example"
+print(str.translate(trantab)) # Th3s 3s str3ng 2x1mpl2
 
-print(f"Сьогодні: {day_of_week}")  # Поверне число від 1 до 7, що відповідає дню тижня
+intab = "aeiou"
+trantab = str.maketrans('', '', intab)
 
-# isocalendar() - це кортеж (ISO_рік, ISO_тиждень, ISO_день_тижня), де:
-# ISO_рік - це рік у форматі ISO.
-# ISO_тиждень - номер тижня в році за ISO 8601 (від 1 до 53).
-# ISO_день_тижня - день тижня за ISO 8601, де 1 означає понеділок, а 7 - неділю.
+str = "This is string example"
+print(str.translate(trantab)) # Ths s strng xmpl
 
-# Отримання ISO календаря
-iso_calendar = now.isocalendar()
+symbols = "0123456789ABCDEF"
+code = [
+        '0000', '0001', '0010', '0011', '0100', '0101', '0110', '0111',
+        '1000', '1001', '1010', '1011', '1100', '1101', '1110', '1111'
+        ]
 
-print(f"ISO рік: {iso_calendar[0]}, ISO тиждень: {iso_calendar[1]}, ISO день тижня: {iso_calendar[2]}")
+MAP = {}
 
-# Робота з часовими зонами
-from datetime import timezone, timedelta
+for s, c in zip(symbols, code):
+    MAP[ord(s)] = c
+    MAP[ord(s.lower())] = c
 
-local_now = datetime.now()
-utc_now = datetime.now(timezone.utc)
+print(MAP)
+result = "34 DF 56 AC".translate(MAP)
+print(result) # 00110100 11011111 01010110 10101100
 
-print(local_now)
-print(utc_now)  # Виведе поточний час в UTC
+# ===============================================================================
+# розробити програму, яка перетворює вхідний текстовий рядок на відповідний код мови Морзе.
 
-# для перетворення UTC часу в час, що відповідає Східному часовому поясу США (UTC-5 годин), можна зробити наступне:
+morze_dict = {'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.',
+              'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..',
+              'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.',
+              'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-',
+              'Y': '-.--', 'Z': '--..', '0': '-----', '1': '.----', '2': '..---',
+              '3': '...--', '4': '....-', '5': '.....', '6': '-....', '7': '--...',
+              '8': '---..', '9': '----.'}
 
-from datetime import datetime, timezone, timedelta
+# Перетворення ключів словника на Unicode коди
+table_morze_dict = {}
+for k, v in morze_dict.items():
+    table_morze_dict[ord(k)] = v
 
-utc_time = datetime.now(timezone.utc)
+string = "Hello world"
 
-# Створення часової зони для Східного часового поясу (UTC-5)
-eastern_time = utc_time.astimezone(timezone(timedelta(hours=-5)))
-# Перетворює час UTC в час Східного часового поясу
-print(eastern_time)  
+result = ""
 
-# Щоб перетворити локальний час у час UTC, спочатку потрібно призначити
-# локальному часу відповідну часову зону, а потім використати метод astimezone() для конвертації його в UTC:
+for ch in string:
+    result = result + ch.upper().translate(table_morze_dict)
 
-# Припустимо, місцевий час належить до часової зони UTC+2
-local_timezone = timezone(timedelta(hours=2))
-local_time = datetime(year=2023, month=3, day=14, hour=12, minute=30, second=0, tzinfo=local_timezone)
+print(result)
+# .... . .-.. .-.. --- / .-- --- .-. .-.. -..
+# ===============================================================================
 
-# Конвертація локального часу в UTC
-utc_time = local_time.astimezone(timezone.utc)
-print(utc_time)  # Виведе час в UTC
+# Форматування рядків
 
-# Стандарт ISO 8601 також підтримує часові зони. 
-# У Python це можна зробити, додавши інформацію про часову зону до об'єкта datetime:
+for i in range(8):
+    s = f"int: {i:d};  hex: {i:#x};  oct: {i:#o};  bin: {i:#b}"
+    print(s)
 
-from datetime import datetime, timezone, timedelta
+# int: 0;  hex: 0x0;  oct: 0o0;  bin: 0b0
+# int: 1;  hex: 0x1;  oct: 0o1;  bin: 0b1
+# int: 2;  hex: 0x2;  oct: 0o2;  bin: 0b10
+# int: 3;  hex: 0x3;  oct: 0o3;  bin: 0b11
+# int: 4;  hex: 0x4;  oct: 0o4;  bin: 0b100
+# int: 5;  hex: 0x5;  oct: 0o5;  bin: 0b101
+# int: 6;  hex: 0x6;  oct: 0o6;  bin: 0b110
+# int: 7;  hex: 0x7;  oct: 0o7;  bin: 0b111
 
-# Час у конкретній часовій зоні
-timezone_offset = timezone(timedelta(hours=2))  # Наприклад, UTC+2
-timezone_datetime = datetime(year=2023, month=3, day=14, hour=12, minute=30, second=0, tzinfo=timezone_offset)
+price = 19.99
+quantity = 3
+total = f"Total: {price * quantity:.2f}"
+print(total) # Total: 59.97
 
-# Конвертація у формат ISO 8601
-iso_format_with_timezone = timezone_datetime.isoformat()
-print(iso_format_with_timezone)
+width = 5
+for num in range(12):
+    print(f'{num:^10} {num**2:^10} {num**3:^10}')
 
-# Робота з часом
-# Метод time.time() повертає поточний час у секундах з 1 січня 1970 року (epoch time).
+# Вирівнювання визначає, як вміст буде вирівняний всередині вказаної ширини поля. Можливі варіанти вирівнювання:
 
-import time
+# <: Вирівнювання вмісту по лівому краю.
+# >: Вирівнювання вмісту по правому краю.
+# ^: Вирівнювання вмісту по центру.
+# =: Використовується для вирівнювання чисел, при цьому знак (якщо він є) відображається зліва, а число - по правому краю поля.
 
-current_time = time.time()
-print(f"Поточний час: {current_time}")
-# Виведе поточний час у секундах з 1 січня 1970 року
 
-# Метод time.sleep(seconds) зупиняє виконання програми на вказану кількість секунд. 
-# Наприклад цей код зупиняє виконання програми на 5 секунд.
+name = "Alice"
+formatted = f"{name:>10}"
+print(formatted)  # Виведе: '     Alice' (вирівнювання праворуч)
 
-print("Початок паузи")
-time.sleep(5)
-print("Кінець паузи")
+# Форматування відсотків у f-рядках виглядає так:
+# f"{value:<ширина>.<точність>%}"
 
-# Метод time.ctime([seconds]) перетворює часову мітку (кількість секунд) у зрозуміле для людини текстове представлення. 
-# Якщо аргумент не вказаний, використовується поточний час.
+completion = 0.756
+formatted = f"{completion:.1%}"
+print(formatted)  # Виведе: '75.6%'
 
-print(f"Поточний час: {current_time}")
+progress = 0.5
+formatted = f"{progress:.0%}"
+print(formatted) # Виведе: '50%'
 
-readable_time = time.ctime(current_time)
-print(f"Читабельний час: {readable_time}")  # Виведе поточний час у зрозумілому форматі
+# Регулярні вирази
+# Метод search() re.search(pattern, string) 
+# Результат виконання re.search() це спеціальний об'єкт Match, якщо знаходить відповідність. Якщо відповідність не знайдена, повертає None.
 
-# Метод time.localtime([seconds]) перетворює часову мітку в структуру struct_time у місцевій часовій зоні.
+# Об'єкт Match має властивості та методи, що використовуються для отримання інформації про пошук та результат:
+# Match.span() повертає кортеж, що містить початкову та кінцеву позиції збігу.
+# Match.string повертає рядок, переданий у функцію,
+# Match.group() повертає частину рядка, в якому був збіг
 
-local_time = time.localtime(current_time)
-print(f"Місцевий час: {local_time}")
+import re
 
+text = "Вивчення Python може бути веселим."
+pattern = "Python"
+match = re.search(pattern, text)
 
+if match:
+    print("Знайдено:", match.group())
+else:
+    print("Не знайдено.") 
+# Знайдено: Python
 
-# Записуємо час на початку виконання
-start_time = time.perf_counter()
+text = "Вивчення Python може бути веселим."
+pattern = r"в\w*м"
+match = re.search(pattern, text, re.IGNORECASE)
 
-# Виконуємо якусь операцію
-for _ in range(1_000_000):
-    pass  # Просто проходить цикл мільйон разів
+if match:
+    print("Знайдено:", match.group())
+# Знайдено: веселим
 
-# Записуємо час після виконання операції
-end_time = time.perf_counter()
+# ==============================================================================
+# Розглянемо простеньку задачу - знаходження електронної адреси в рядку.
 
-# Розраховуємо та виводимо час виконання
-execution_time = end_time - start_time
-print(f"Час виконання: {execution_time} секунд")
+text = "Моя електронна адреса: example@example.com"
+pattern = r"\w+@\w+\.\w+"
+match = re.search(pattern, text)
 
-# Один мільйон
-a = 1_000_000
-print(a)  # Виведе 1000000
+if match:
+    print("Електронна адреса:", match.group())
+else:
+    print("Не знайдено.")
+# Електронна адреса: example@example.com
 
-# Десять мільйонів
-b = 10_000_000
-print(b)  # Виведе 10000000
+# Припустимо, у нас є рядок з електронною адресою, і ми хочемо вилучити ім'я користувача та домен цієї електронної адреси окремо. 
+# Треба розділити "username@domain.com" на "username" (ім'я користувача) та "domain.com" (домен).
 
-# Один мільярд
-c = 1_000_000_000
-print(c)  # Виведе 1000000000
+email = "username@domain.com"
+pattern = r"(\w+)@(\w+\.\w+)"
+match = re.search(pattern, email)
 
+if match:
+    user_name = match.group(1)
+    domain_name = match.group(2)
+    print("Ім'я користувача:", user_name)
+    print("Домен:", domain_name)
+# Ім'я користувача: username
+# Домен: domain.com
 
-# ============================================================================== # 
-# Модуль random використовується для генерації випадкових чисел та вибору випадкових елементів з послідовностей.
+# ==============================================================================
 
 import random
-# Генерація випадкового цілого числа в діапазоні від 1 до 10
-random_integer = random.randint(1, 10)
-print(f"Випадкове ціле число: {random_integer}")
+coin = {1: 'Orel', 2: 'Peshcka'}
 
-# Симуляція кидка кубика
+count_O = 0
+count_P = 0
 
-dice_roll = random.randint(1, 6)
-print(f"Ви кинули {dice_roll}")
+seq = []
+while count_O < 4 and count_P < 4:
+    choice = random.randint(1, 2)
+    if choice == 1:
+        count_O += 1
+        count_P = 0
+    else:
+        count_P += 1
+        count_O = 0
 
-# Метод random.random() потрібен, щоб отримати випадкове число в інтервалі 0, 1. 
-# Він генерує випадкове дійсне число між 0.0 (включно) та 1.0 (не включно):
+    seq.append(coin[choice])
 
-random_float = random.random()
-print(f"Випадкове дійсне число: {random_float}")
+print(seq)
+print(len(seq))
 
-# Припустимо, вам потрібно симулювати випадкове відсоткове заповнення. Можна використовувати random.random() для цього:
+# ==============================================================================
+# Метод re.findall() використовується для знаходження всіх входжень шаблону, заданого регулярним виразом, у заданому рядку.
 
-percentage_fill = random.random() * 100
-print(f"Випадкове відсоткове заповнення: {percentage_fill:.2f}%")
+text = "Рік 2023 був складнішим, ніж 2022"
+pattern = r"\d+"
+matches = re.findall(pattern, text)
 
-# Метод random.randrange(start, stop[, step]) повертає випадково вибране число з заданого діапазону.
+print(matches) # ['2023', '2022']
 
-random_range = random.randrange(0, 101, 5)  # Випадкове число від 0 до 100 з кроком 5
-print(f"Випадкове число з діапазону: {random_range}")
+# У цьому прикладі регулярний вираз \d+ шукає одну або більше цифр у рядку підряд та знаходить їх, на виході ми отримуємо список всіх чисел в рядку.
 
-# Симуляція пострілу по мішені, але необхідно вибрати випадковий номер від 1 до 10, та лише непарні числа:
+text = "Python - це проста, але потужна мова програмування."
+pattern = r"\w+"
+matches = re.findall(pattern, text)
 
-target = random.randrange(1, 11, 2)
-print(f"Ціль: {target}")
+print(matches)  # Виведе список всіх слів у рядку
+# ['Python', 'це', 'проста', 'але', 'потужна', 'мова', 'програмування']
 
-# Перемішування колоди карт:
+text = "Контакти: example1@example.com, example2@sample.org"
+pattern = r"\w+@\w+\.\w+"
+matches = re.findall(pattern, text)
 
-cards = ["Туз", "Король", "Дама", "Валет", "10", "9", "8", "7", "6"]
+print(matches)  # Виведе всі знайдені електронні адреси
+# ['example1@example.com', 'example2@sample.org']
 
-random.shuffle(cards)
+# Метод re.sub() в модулі re Python використовується для заміни входжень регулярного виразу pattern в рядку string на рядок repl. 
+# modified_string = re.sub(pattern, repl, string)
 
-print(f"Перемішана колода: {cards}")
+# Замінити всі пробільні символи на підкреслення.
+file_name = "Мій документ Python.txt"
+pattern = r"\s"
+replacement = "_"
+formatted_name = re.sub(pattern, replacement, file_name)
 
-# Вибір випадкового фрукта:
+print(formatted_name)  # Мій_документ_Python.txt
 
-fruits = ['apple', 'banana', 'orange']
-print(random.choice(fruits))
+# Видалимо всі пунктуаційні знаки з рядка.
 
-items = ['яблуко', 'банан', 'вишня', 'диня']
-chosen_item = random.choices(items, k=1)
-chosen_item_3 = random.choices(items, k=3)
-print(chosen_item)  # Виведе випадковий фрукт з списку
-print(chosen_item_3)  # Виведе список з трьох випадкових фруктів
+text = "Python - потужна, універсальна; мова!"
+pattern = r"[;,\-:!\.]"
+replacement = ""
+modified_text = re.sub(pattern, replacement, text)
 
-numbers = [1, 2, 3, 4, 5]
-chosen_numbers = random.choices(numbers, k=3)
-print(chosen_numbers)  # Виведе список з трьох випадкових чисел
+print(modified_text) # Python потужна універсальна мова
 
-# Вибір з вагами
-colors = ['червоний', 'зелений', 'синій']
-weights = [10, 1, 1]
-chosen_color = random.choices(colors, weights, k=1)
-print(chosen_color)  # Виведе 'червоний' з ймовірністю 10/12, 'зелений' або 'синій' з ймовірністю 1/12
+# Нам необхідно змінити формат телефонних номерів. 
+# В тексті в нас телефони записані в такому форматі 050-171-1634, 
+# нам необхідно замінити їх на формат (050) 171-1634
 
-import random
+phone = """
+        Михайло Куліш: 050-171-1634
+        Вікторія Кущ: 063-134-1729
+        Оксана Гавриленко: 068-234-5612
+        """
+pattern = r"(\d{3})-(\d{3})-(\d{4})"
+replacement = r"(\1) \2-\3"
+formatted_phone = re.sub(pattern, replacement, phone)
 
-participants = ['Анна', 'Богдан', 'Віктор', 'Галина', 'Дмитро', 'Олена', 'Женя', 'Зорян', 'Ігор', 'Йосип']
-team = random.sample(participants, 4)
-print(f"Команда: {team}") # Виведе випадкову команду з 4 учасників
+print(formatted_phone) 
+# Михайло Куліш: (050) 171-1634
+# Вікторія Кущ: (063) 134-1729
+# Оксана Гавриленко: (068) 234-5612
 
+# Функція re.split() в модулі re Python використовується для розбивання рядка за заданим регулярним виразом. Це дозволяє розділяти текст на частини за складнішими критеріями, ніж простий рядковий метод split().
+# list_of_elements = re.split(pattern, string)
 
-price = random.uniform(50, 100)
-print(f"Випадкова ціна: {price:.2f}")  # Виведе випадкове дійсне число між 50 і 100
+# розділимо рядок на слова, використовуючи пробіли як роздільники.
+text = "Python - це проста, але потужна мова програмування."
+pattern = r"\s+"
+words = re.split(pattern, text)
 
-#  =============================================================================== #
-# Модуль math надає доступ до математичних функцій і констант.
-import math
+print(words)  # ['Python', '-', 'це', 'проста,', 'але', 'потужна', 'мова', 'програмування.']
 
-# Вихідне число
-x = 3.7
+# розділити рядок на частини, використовуючи пунктуаційні знаки як роздільники.
 
-# Використання різних методів округлення
-ceil_result = math.ceil(x)  # Округлення вгору
-floor_result = math.floor(x)  # Округлення вниз
-trunc_result = math.trunc(x)  # Відсікання дробової частини
+text = "Python - потужна; проста, універсальна: мова!"
+pattern = r"[;,\-:!\s]+"
+elements = re.split(pattern, text)
 
-print(ceil_result, floor_result, trunc_result) # Виведе: 4 3 3
-print(math.pi)  # Виведе значення числа π (пі)
-print(math.e)   # Виведе значення числа e (основа натурального логарифму)
-print(math.tau)  # Виведе значення числа τ (тау)
-print(math.inf)  # Виведе позитивну нескінченність
-print(math.nan)  # Виведе "не число" (NaN)
+print(elements)  # ['Python', 'потужна', 'проста', 'універсальна', 'мова', '']
 
-# Тригонометрія
-angle = math.radians(60)  # Конвертація з градусів у радіани
-print(math.sin(angle))  # Синус кута
+import re
 
-# Корінь числа
-print(math.sqrt(9))  # Квадратний корінь з 9
+text = "apple#banana!mango@orange;kiwi"
+pattern = r"[#@;!]"
+fruits = re.split(pattern, text)
 
-# Логарифми
-print(math.log(10, 2))  # Логарифм 10 за основою 2
-
-print(math.factorial(5))  # Факторіал числа 5 (5!) = 120
-
-r = math.isclose(0.1 + 0.2, 0.3)
-print(r)  # Це поверне True
-
-r1 = math.isclose(0.1, 0.10000000009)
-print(r1)  # Це поверне True
+print(fruits)
+# ['apple', 'banana', 'mango', 'orange', 'kiwi']
