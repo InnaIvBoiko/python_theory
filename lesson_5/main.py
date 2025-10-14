@@ -153,3 +153,45 @@ print(lines) # ['first line', 'second line', 'third line']
 
 with open('raw_data.bin', 'wb') as fh:
     fh.write(b'Hello world!')
+
+s = b'Hello!'
+print(s[1])  # Виведе: 101 (це ASCII-код символу 'e')
+print(s[1:4])  # Виведе: b'ell'
+
+byte_str = 'some text'.encode()
+print(byte_str) # b'some text'
+
+# Перетворення списку чисел у байт-рядок
+numbers = [0, 128, 255]
+byte_numbers = bytes(numbers)
+print(byte_numbers)  # Виведе байтове представлення чисел b'\x00\x80\xff'
+
+for num in [127, 255, 156]:
+  print(hex(num))
+    # Виведе: 0x7f
+    # Виведе: 0xff
+    # Виведе: 0x9c
+
+ord('a')  # 97
+
+chr(97)  # 'a'
+
+s = "Привіт!"
+
+utf8 = s.encode()
+print(f"UTF-8: {utf8}") # UTF-8: b'\xd0\x9f\xd1\x80\xd0\xb8\xd0\xb2\xd1\x96\xd1\x82!'
+
+utf16 = s.encode("utf-16")
+print(f"UTF-16: {utf16}") # UTF-16: b'\xff\xfeP\x00r\x00i\x00v\x00i\x00t\x00!\x00'
+
+cp1251 = s.encode("cp1251")
+print(f"CP-1251: {cp1251}") # CP-1251: b'\xcf\xf0\xe8\xe2\xe8\xf2!'
+
+s_from_utf16 = utf16.decode("utf-16")
+print(s_from_utf16 == s) # True
+
+# Відкриття текстового файлу з явним вказівкам UTF-8 кодування
+with open('example.txt', 'r', encoding='utf-8') as file:
+    content = file.read()
+    print(content)
+
